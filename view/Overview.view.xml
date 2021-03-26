@@ -1,0 +1,176 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:ui="sap.ui.table"
+	controllerName="Trace.controller.Overview" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Page title="Task Overview" class="sapUiSizeCompact" navButtonPress="BackToTask" showNavButton="true">
+		<content>
+			<ui:Table sort="onTableSort" rows="{Level1>/results}" selectionMode="None" visibleRowCount="1" class="sapUiSmallMarginBeginEnd">
+				<ui:columns>
+					<ui:Column>
+						<Label text="{i18n>RequestID}" tooltip="{i18n>RequestID}"/>
+						<ui:template>
+							<Text text="{Level1>RequestID}"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column>
+						<Label text="{i18n>Grid}" tooltip="{i18n>Grid}"/>
+						<ui:template>
+							<Text text="{Level1>Grid}"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column>
+						<Label text="{i18n>AccountName}" tooltip="{i18n>AccountName}"/>
+						<ui:template>
+							<Text text="{Level1>AccountName}"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column>
+						<Label text="{i18n>RequName}" tooltip="{i18n>RequName}"/>
+						<ui:template>
+							<Text text="{Level1>RequestorCode1}"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column>
+						<Label text="{i18n>RequName}" tooltip="{i18n>RequEmail}"/>
+						<ui:template>
+							<Text text="{Level1>RequestorEmail}"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column>
+						<Label text="{i18n>RequestorComments}" tooltip="{i18n>RequestorComments}"/>
+						<ui:template>
+							<Text text="{Level1>rcomment}"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column>
+						<Label text="{i18n>DuplicateComments}" tooltip="{i18n>DuplicateComments}"/>
+						<ui:template>
+							<Text text="{Level1>dcomment}"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column>
+						<Label text="{i18n>Attachments}" tooltip="{i18n>Attachments}"/>
+						<ui:template>
+							<Link text="{path:'Level1>attachment',formatter:'Trace.model.Formatter.SetTaskAttachment'}"
+								enabled="{path:'Level1>attachment',formatter:'Trace.model.Formatter.EnableTaskAttachment'}" customData:sUrl = "{Level1>attachment}"
+								press="onPressLinkAttachments">
+							
+							</Link>
+							<!--<Link text="{path:'Level1>attachment',formatter:'Trace.model.Formatter.AvailableAttachment'}"
+								enabled="{path:'Level1>attachment',formatter:'Trace.model.Formatter.EnableAttachment'}"-->
+						</ui:template>
+					</ui:Column>
+					<ui:Column>
+						<Label text="{i18n>Status}" tooltip="{i18n>Status}"/>
+						<ui:template>
+							<ObjectStatus class="sapMObjectStatusLarge" text="{Level1>Status}"
+								state="{path:'Level1>Status',formatter:'Trace.model.Formatter.IndicatorState'}"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column>
+						<Label text="{i18n>Country}" tooltip="{i18n>Country}"/>
+						<ui:template>
+							<Text text="{Level1>country}"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column>
+						<Label text="{i18n>System}" tooltip="{i18n>System}"/>
+						<ui:template>
+							<Text text="{Level1>system}"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column>
+						<Label text="{i18n>StartData}" tooltip="{i18n>StartData}"/>
+						<ui:template>
+							<Text text="{path:'Level1>StartData',formatter:'Trace.model.Formatter.DateTimeConversionDDMMYYTime'}"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column>
+						<Label text="{i18n>EndDate}" tooltip="{i18n>EndDate}"/>
+						<ui:template>
+							<Text text="{path:'Level1>EndDate',formatter:'Trace.model.Formatter.DateTimeConversionDDMMYYTime'}"/>
+						</ui:template>
+					</ui:Column>
+				</ui:columns>
+			</ui:Table>
+			<Toolbar>
+				<Label text="Task Details" design="Bold"></Label>
+			</Toolbar>
+			<ui:Table sort="onTableSort" rows="{DetailsModel>/results}" selectionMode="None" visibleRowCount="7" class="sapUiSmallMarginBeginEnd">
+				<ui:columns>
+					<ui:Column>
+						<Label text="{i18n>Taskid}" tooltip="{i18n>Taskid}"/>
+						<ui:template>
+							<Text text="{DetailsModel>id}"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column>
+						<Label text="{i18n>TaskComments}" tooltip="{i18n>TaskComments}"/>
+						<ui:template>
+							<Text text="{DetailsModel>taskComment}"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column>
+						<Label text="{i18n>TaskGrp}" tooltip="{i18n>TaskGrp}"/>
+						<ui:template>
+							<Link text="{DetailsModel>group}" press="onPressLinkGroup"></Link>
+						</ui:template>
+					</ui:Column>
+					<ui:Column >
+						<Label text="{i18n>TaskAssTo}" tooltip="{i18n>TaskAssTo}"/>
+						<ui:template>
+							<Text text="{DetailsModel>actual}"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column>
+						<Label text="{i18n>Attachments}" tooltip="{i18n>Attachments}"/>
+						<ui:template>
+							<Link text="{path:'DetailsModel>taskAttachment',formatter:'Trace.model.Formatter.SetTaskAttachment'}"
+								enabled="{path:'DetailsModel>taskAttachment',formatter:'Trace.model.Formatter.EnableTaskAttachment'}"  customData:sUrl = "{DetailsModel>taskAttachment}" press="onPressLinkTaskAttachments">
+							
+							</Link>
+						</ui:template>
+					</ui:Column>
+					<!--<ui:Column >-->
+					<!--	<Label text="{i18n>TaskAssToemail}" tooltip="{i18n>TaskAssToemail}"/>-->
+					<!--	<ui:template>-->
+					<!--		<Text text=""/>-->
+					<!--	</ui:template>-->
+					<!--</ui:Column>-->
+					<ui:Column >
+						<Label text="{i18n>TaskStat}" tooltip="{i18n>TaskStat}"/>
+						<ui:template>
+							<!--<Text text="{DetailsModel>status}"/>-->
+							<ObjectStatus class="sapMObjectStatusLarge" text="{DetailsModel>status}"
+								state="{path:'DetailsModel>status',formatter:'Trace.model.Formatter.IndicatorState'}"/>
+						</ui:template>
+					</ui:Column>
+					<!--<ui:Column >-->
+					<!--	<Label text="{i18n>TaskDue}" tooltip="{i18n>TaskDue}"/>-->
+					<!--	<ui:template>-->
+					<!--		<Text text="{path:'DetailsModel>expiration',formatter:'Trace.model.Formatter.DateTimeConversionDDMMYYTime'}"/>-->
+					<!--	</ui:template>-->
+					<!--</ui:Column>-->
+					<ui:Column >
+						<Label text="{i18n>TaskStart}" tooltip="{i18n>TaskStart}"/>
+						<ui:template>
+							<Text text="{path:'DetailsModel>creation',formatter:'Trace.model.Formatter.DateTimeConversionDDMMYYTime'}"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column>
+						<Label text="{i18n>Taskend}" tooltip="{i18n>Taskend}"/>
+						<ui:template>
+							<Text text="{path:'DetailsModel>completion',formatter:'Trace.model.Formatter.DateTimeConversionDDMMYYTime'}"/>
+						</ui:template>
+					</ui:Column>
+				</ui:columns>
+			</ui:Table>
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer></ToolbarSpacer>
+				<Button text="{i18n>createsubPage}" enabled="true" tooltip="{i18n>createsubPage}" icon="sap-icon://excel-attachment" type="Accept"
+					press="onExport"/>
+				<Button tooltip="{i18n>Close}" icon="sap-icon://decline" text="{i18n>Close}" type="Reject" press="onCancelRequest"/>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

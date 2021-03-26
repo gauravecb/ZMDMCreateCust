@@ -1,0 +1,119 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog title="{i18n>Adv_AdvancedSearch}" class="sapUiSizeCompact" attachAfterOpen = "afetrDilogOpen">
+		<Table >
+			<columns>
+				<Column>
+					<Text text="{i18n>Criteria}"/>
+				</Column>
+				<Column>
+					<Text text="{i18n>Value}"/>
+				</Column>
+			</columns>
+			<items >
+				<ColumnListItem Press="onTablePress1">
+					<cells>
+						<Text text="{i18n>Adv_RequestID}"/>
+						<FlexBox>
+							<Input tooltip="{i18n>Adv_TooltipPrefix} {i18n>Adv_RequestID} {i18n>Adv_TooltipSuffix}" value="{searchAndAdvancedSearchModelSet>/AdvancedSearch/ReqIDFrom}" placeholder="{i18n>Adv_From}"/>
+							<Text text="{}" width="20px"/>
+							<Input tooltip="{i18n>Adv_TooltipPrefix} {i18n>Adv_RequestID} {i18n>Adv_TooltipSuffix}" value="{searchAndAdvancedSearchModelSet>/AdvancedSearch/ReqIDTo}" placeholder="{i18n>Adv_To}"/>
+						</FlexBox>
+					</cells>
+				</ColumnListItem>
+				<ColumnListItem Press="onTablePress1">
+					<cells>
+						<Text text="{i18n>Adv_GoldenRecordID}"/>
+						<Input  tooltip="{i18n>Adv_TooltipPrefix} {i18n>Adv_GoldenRecordID} {i18n>Adv_TooltipSuffix}" value="{searchAndAdvancedSearchModelSet>/AdvancedSearch/GRID}"/>
+					</cells>
+				</ColumnListItem>
+				<ColumnListItem>
+					<cells>
+						<Text text="{i18n>Adv_ApplicationID}"/>
+						<Input tooltip="{i18n>Adv_TooltipPrefix} {i18n>Adv_ApplicationID} {i18n>Adv_TooltipSuffix}" value="{searchAndAdvancedSearchModelSet>/AdvancedSearch/ApplicationID}"/>
+					</cells>
+				</ColumnListItem>
+				<ColumnListItem>
+					<cells>
+						<Text text="{i18n>Adv_AccountName}"/>
+						<Input tooltip="{i18n>Adv_TooltipPrefix} {i18n>Adv_AccountName} {i18n>Adv_TooltipSuffix}" value="{searchAndAdvancedSearchModelSet>/AdvancedSearch/AccountName}"/>
+					</cells>
+				</ColumnListItem>
+				<ColumnListItem>
+					<cells>
+						<Text text="{i18n>Adv_Requestor}"/>
+						<Input tooltip="{i18n>Adv_TooltipPrefix} {i18n>Adv_Requestor} {i18n>Adv_TooltipSuffix}" value="{searchAndAdvancedSearchModelSet>/AdvancedSearch/Requester}"/>
+					</cells>
+				</ColumnListItem>
+				<ColumnListItem >
+					<cells>
+						<Text text="{i18n>Adv_RequestorStat}"/>
+						<ComboBox width="100%" change="" valueStateText="{CreateModelSet>CountryMessage}" valueState="{CreateModelSet>CountryState}"
+							items="{UiDropdownModel>/ReqStatus}" selectedKey="{searchAndAdvancedSearchModelSet>/AdvancedSearch/RequestStatus}"
+							placeholder="{i18n>Adv_Select} {i18n>Adv_RequestorStat}" tooltip="{i18n>Adv_TooltipPrefix} {i18n>Adv_RequestorStat} {i18n>Adv_TooltipSuffix}">
+							<core:Item key="{UiDropdownModel>Key}" text="{UiDropdownModel>value}"/>
+						</ComboBox>
+						
+					</cells>
+				</ColumnListItem>
+				<ColumnListItem >
+					<cells>
+						<Text text="{i18n>Adv_ReqType}"/>
+						<ComboBox width="100%" change="" valueStateText="{CreateModelSet>CountryMessage}" valueState="{CreateModelSet>CountryState}"
+							items="{UiDropdownModel>/ReqType}" selectedKey="{searchAndAdvancedSearchModelSet>/AdvancedSearch/RequestorType}"
+							placeholder="{i18n>Adv_Select} {i18n>Adv_ReqType}" tooltip="{i18n>Adv_TooltipPrefix} {i18n>Adv_ReqType} {i18n>Adv_TooltipSuffix}">
+							<core:Item key="{UiDropdownModel>Key}" text="{UiDropdownModel>value}"/>
+						</ComboBox>
+					</cells>
+				</ColumnListItem>
+				<ColumnListItem >
+					<cells>
+						<Text text="{i18n>Adv_Priority}"/>
+						<ComboBox width="100%" change="onSelectCountryAddressAndName" valueStateText="{CreateModelSet>CountryMessage}"
+							valueState="{CreateModelSet>CountryState}" items="{UiDropdownModel>/Priority}" tooltip="{i18n>Adv_TooltipPrefix} {i18n>Adv_Priority} {i18n>Adv_TooltipSuffix}"
+							selectedKey="{searchAndAdvancedSearchModelSet>/AdvancedSearch/Priority}" placeholder="{i18n>Adv_Select} {i18n>Adv_Priority}">
+							<core:Item key="{UiDropdownModel>Key}" text="{UiDropdownModel>value}"/>
+						</ComboBox>
+					</cells>
+				</ColumnListItem>
+				<ColumnListItem>
+					<cells>
+						<Text text="{i18n>Adv_StartDate}"/>
+						<DatePicker id = "idSdate" value="{searchAndAdvancedSearchModelSet>/AdvancedSearch/StartDate}" valueFormat = "yyyy-MM-dd" placeholder ="MMM d, yyyy" />
+						<!--<DateTimePicker value="{ path: 'searchAndAdvancedSearchModelSet>/AdvancedSearch/StartDate', type: 'sap.ui.model.type.DateTime'}"/>-->
+					</cells>
+				</ColumnListItem>
+				<ColumnListItem>
+					<cells>
+						<Text text="{i18n>Adv_EndDate}"/>
+						<DatePicker id = "idEdate" value="{searchAndAdvancedSearchModelSet>/AdvancedSearch/EndDate}" valueFormat = "yyyy-MM-dd" placeholder ="MMM d, yyyy"/>
+						<!--<DateTimePicker value="{ path: 'searchAndAdvancedSearchModelSet>/AdvancedSearch/EndDate', type: 'sap.ui.model.type.DateTime'}"/>-->
+					</cells>
+				</ColumnListItem>
+				<ColumnListItem >
+					<cells>
+						<Text text="{i18n>Adv_Country}"/>
+						<ComboBox width="100%" change="onSelectCountryAddressAndName" valueStateText="{CreateModelSet>CountryMessage}"
+							valueState="{CreateModelSet>CountryState}" items="{CountryComboSet>/results}"
+							selectedKey="{searchAndAdvancedSearchModelSet>/AdvancedSearch/Country}" placeholder="{i18n>Adv_Select} {i18n>Country}">
+							<core:Item key="{CountryComboSet>code}" text="{CountryComboSet>englishShortName}"/>
+						</ComboBox>
+					</cells>
+				</ColumnListItem>
+				<ColumnListItem>
+					<cells>
+						<Text text="{i18n>System}"/>
+						<ComboBox width="100%" showValueStateMessage="false" valueState="{HeaderModelSet>/SystemValState}" change="liveChangeSystem"
+							selectedKey="{searchAndAdvancedSearchModelSet>/AdvancedSearch/System}" items="{AdvSearchSystemModelSet>/results}"
+							enabled="{HeaderModelSet>/SystemEnable}" textAlign="Left" placeholder="{i18n>Adv_Enter} {i18n>System}">
+							<core:Item key="{AdvSearchSystemModelSet>logicalCompId}" text="{AdvSearchSystemModelSet>logicalCompId}"/>
+						</ComboBox>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+		<buttons>
+			<Button text="Search" press="onPressAdvancedSearchSearchButton"/>
+			<Button text="Close" press="onPressAdvancedSearchCloseButton"></Button>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

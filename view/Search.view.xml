@@ -1,0 +1,101 @@
+<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns:c="sap.ui.core" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" displayBlock="true" xmlns:ui="sap.ui.table" xmlns="sap.m"
+	controllerName="Trace.controller.Search">
+	<Page id="page" class="sapUiSizeCompact">
+		<content>
+			<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanL="5" labelSpanM="8" labelSpanS="6" adjustLabelSpan="false"
+				emptySpanL="0" emptySpanM="0" columnsL="1" columnsM="1">
+				<f:content>
+					<Toolbar>
+						<ToolbarSpacer></ToolbarSpacer>
+						<SearchField search="onPressLiveSearchField" value="{searchAndAdvancedSearchModelSet>/Search/SearchFieldValue}" width="50%"></SearchField>
+						<Button text="{i18n>Adv_AdvancedSearch}" press="onPressAdvancedSearchButton" type="Accept" visible="true"/>
+						<ToolbarSpacer></ToolbarSpacer>
+					</Toolbar>
+				</f:content>
+			</f:SimpleForm>
+			<ui:Table id="exportTable" rowSelectionChange="onPressSearchDataTableRow" rows="{searchModelSet>/results}" selectionMode="Single"
+				visibleRowCount="10" selectionBehavior="RowOnly" class="sapUiSmallMarginBeginEnd">
+				<ui:extension>
+					<OverflowToolbar>
+						<Title text="Results ({searchModelSet>/results/length})"/>
+						<ToolbarSpacer></ToolbarSpacer>
+						<Button  enabled = "false" id="idLoadMore" text = "Load More Records" press = "OnPressLoadMore"></Button>
+					</OverflowToolbar>
+				</ui:extension>
+				<ui:columns>
+					<ui:Column id = "idReqCol" filterProperty = "RequestID" sortProperty="RequestID" sortOrder = "Descending" width = "120px">
+						<Label text="{i18n>RequestID}"/>
+						<ui:template>
+							<Text text="{searchModelSet>RequestID}"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column sortProperty="Grid" filterProperty = "Grid" width = "140px">
+						<Label text="{i18n>Grid}"/>
+						<ui:template>
+							<Text text="{searchModelSet>Grid}"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column filterProperty = "AccountName">
+						<Label text="{i18n>AccountName}" />
+						<ui:template>
+							<Text text="{searchModelSet>AccountName}"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column filterProperty = "RequestorCode1">
+						<Label text="{i18n>RequName}"/>
+						<ui:template>
+							<Text text="{searchModelSet>RequestorCode1}"/>
+						</ui:template>
+					</ui:Column>
+						<ui:Column filterProperty = "RequestorEmail" >
+						<Label text="{i18n>RequEmail}"/>
+						<ui:template>
+							<Text text="{searchModelSet>RequestorEmail}"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column filterProperty = "Status">
+						<Label text="{i18n>Status}"/>
+						<ui:template>
+							<ObjectStatus  text="{searchModelSet>Status}"
+								state="{path:'searchModelSet>Status',formatter:'Trace.model.Formatter.IndicatorState'}"/>
+						</ui:template>
+					</ui:Column>
+					<!--<ui:Column>-->
+					<!--	<Label text="{i18n>Type}"/>-->
+					<!--	<ui:template>-->
+					<!--		<Text text="{searchModelSet>Type}"/>-->
+					<!--	</ui:template>-->
+					<!--</ui:Column>-->
+					<ui:Column filterProperty = "StartData">
+						<Label text="{i18n>StartData}"/>
+						<ui:template>
+							<Text text="{searchModelSet>StartData}"/>
+							<!--<Text text="{path:'searchModelSet>StartData',formatter:'Trace.model.Formatter.DateTimeConversionDDMMYYTime'}"/>-->
+						</ui:template>
+					</ui:Column>
+					<ui:Column filterProperty = "EndDate">
+						<Label text="{i18n>EndDate}"/>
+						<ui:template>
+								<Text text="{searchModelSet>EndDate}"/>
+							<!--<Text text="{path:'searchModelSet>EndDate',formatter:'Trace.model.Formatter.DateTimeConversionDDMMYYTime'}"/>-->
+						</ui:template>
+					</ui:Column>
+				</ui:columns>
+			</ui:Table>
+			
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer></ToolbarSpacer>
+				<Button text="{i18n>openSubPage}" enabled="{searchAndAdvancedSearchModelSet>/Search/openButtonEnable}" tooltip="{i18n>openSubPage}" icon="sap-icon://e-learning" type="Accept"
+					press="onClickOpenRecod"/>
+				<Button text="{i18n>createsubPage}" enabled="{searchAndAdvancedSearchModelSet>/Search/ExportEnable}" tooltip="{i18n>createsubPage}" icon="sap-icon://excel-attachment" type="Accept"
+					press="onExport"/>
+				<Button tooltip="{i18n>Close}" icon="sap-icon://decline" text="{i18n>Close}" type="Reject" press="onCancelRequest"/>
+			</Toolbar>
+		</footer>
+	</Page>
+	<!--	</pages>
+	</App>-->
+</mvc:View>

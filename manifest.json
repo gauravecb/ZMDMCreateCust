@@ -1,0 +1,142 @@
+{
+	"_version": "1.7.0",
+	"sap.app": {
+		"id": "Trace",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"sourceTemplate": {
+			"id": "servicecatalog.connectivityComponent",
+			"version": "0.0.0"
+		},
+		"dataSources": {
+			"ZMDM_BUSINESSPARTNER_SRV": {
+				"uri": "/sap/opu/odata/sap/ZMDM_BUSINESSPARTNER_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadata.xml"
+				}
+			}
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_hcb",
+			"sap_belize"
+		]
+	},
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "Trace.view.App",
+			"type": "XML",
+			"async": true,
+			"id": "app",
+			"height": "100%"
+		},
+		"dependencies": {
+			"minUI5Version": "1.30.0",
+			"libs": {
+				"sap.ui.layout": {},
+				"sap.ui.core": {},
+				"sap.m": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "Trace.i18n.i18n"
+				}
+			},
+			"TraceReport": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneTime",
+					"defaultCountMode": "Request",
+					"useBatch": false
+				},
+				"dataSource": "ZMDM_BUSINESSPARTNER_SRV",
+				"preload": true
+			}
+		},
+		"resources": {
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"async": true,
+				"viewPath": "Trace.view",
+				"controlAggregation": "pages",
+				"controlId": "app",
+				"clearControlAggregation": false
+			},
+			"routes": [
+				{
+					"name": "RouteSearch",
+					"pattern": "",
+					"target": [
+						"TargetSearch"
+					]
+				},
+				{
+					"name": "Overview",
+					"pattern": "Overview({contextPath})",
+					"target": [
+						"Overview"
+					]
+				}
+			],
+			"targets": {
+				"TargetSearch": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearControlAggregation": false,
+					"viewId": "Search",
+					"viewName": "Search"
+				},
+				"App": {
+					"viewType": "XML",
+					"viewName": "App"
+				},
+				"Overview": {
+					"viewType": "XML",
+					"viewName": "Overview"
+				}
+			}
+		}
+	},
+	"sap.platform.abap": {
+		"uri": "/sap/bc/ui5_ui5/sap/zmdm_tracetrack",
+		"_version": "1.1.0"
+	}
+}
